@@ -1,5 +1,5 @@
 /*
-* Projet Arduino Gourde connectée v1.0
+* Projet Arduino Gourde connectée v1.0 Safe-Bottle
 * Samuel BARON
 * Théo LEFEVRE
 */
@@ -230,20 +230,16 @@ void displayValeursSerial(float temperature, float tdsValue, float EC){
 void displayValeursBT(float temperature, float tdsValue, float EC){
   
   /* Affiche la temperature */
-  bluetoothSerial.print(F("Temperature : "));
   bluetoothSerial.print(temperature, 2);
-  bluetoothSerial.write(176);
-  bluetoothSerial.print("C ; ");
+  bluetoothSerial.print(',');
   
   /* Affiche le taux de TDS */
-  bluetoothSerial.print("TDS : ");
-  bluetoothSerial.print(tdsValue,2);
-  bluetoothSerial.print(" ppm ; ");
+  bluetoothSerial.print(tdsValue, 2);
+  bluetoothSerial.print('!');
   
   /* Affiche la conductivite */
-  bluetoothSerial.print("EC : ");
-  bluetoothSerial.print(EC,2);
-  bluetoothSerial.print(" mSiemens ; ");
+  bluetoothSerial.print(EC, 2);
+  bluetoothSerial.print(';');
 }
 
 /*=============================================== displayEtat ===============================================*/
