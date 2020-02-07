@@ -120,7 +120,7 @@ float getTDS(){
     float compensationVoltage = averageVoltage / compensationCoefficient;              // temperature compensation
     
     tdsValue = 0.5 * ( 133.42 * compensationVoltage * compensationVoltage * compensationVoltage - 255.86 * compensationVoltage * compensationVoltage + 857.39 * compensationVoltage );
-    //convert voltage value to tds value
+    //convert voltage value to tds value, tds = 0.5 * conductivite, 
   }
   return tdsValue;
 }
@@ -250,18 +250,18 @@ void displayValeursBT(float temperature, float tdsValue, float EC){
 void displayEtat(float tdsValue, float EC){
   if(tdsValue == 0 || EC == 0){
     displayColor(COLOR_CYAN);
-    Serial.println(" Cyan");
+    Serial.println(" Pure / Pas d'eau");
   }
-  else if((tdsValue > 0 && tdsValue < 200) && EC < 0.3){
+  if((tdsValue > 0 && tdsValue < 200) && EC < 0.3){
     displayColor(COLOR_GREEN);
-    Serial.println(" Vert");
+    Serial.println(" Bonne");
   }
-  else if((tdsValue >= 200 && tdsValue < 500) || EC >= 0.3){
+  if((tdsValue >= 200 && tdsValue < 500) || EC >= 0.3){
     displayColor(COLOR_YELLOW);
-    Serial.println(" Jaune");
+    Serial.println(" Moyenne");
   }
-  else{
+  if(tdsValue >= 500 && EC > 0.3){
     displayColor(COLOR_RED);
-    Serial.println(" Red");
+    Serial.println(" Mauvaise");
   }
 }
