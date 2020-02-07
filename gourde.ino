@@ -82,8 +82,11 @@ void loop(){
   EC = tdsValue / ( PPMconversion * 1000.00 ); // Calcul conductivite a partir du TDS
 
   displayValeursSerial(temperature, tdsValue, EC); // Affichage des données sur la console Serie
+  delay(10);
   displayValeursBT(temperature, tdsValue, EC);     // Affichage des données sur la console Serie Bluetooth
+  delay(10);
   displayEtat(tdsValue, EC);                       // Affichage de l'etat sur la led
+  delay(10);
 }
 
 
@@ -249,15 +252,15 @@ void displayEtat(float tdsValue, float EC){
     displayColor(COLOR_CYAN);
     Serial.println(" Cyan");
   }
-  if(tdsValue > 0 && tdsValue < 100 && EC < 0.3){
+  else if((tdsValue > 0 && tdsValue < 200) && EC < 0.3){
     displayColor(COLOR_GREEN);
     Serial.println(" Vert");
   }
-  if(tdsValue >= 200 && tdsValue < 500 || EC >= 0.3){
+  else if((tdsValue >= 200 && tdsValue < 500) || EC >= 0.3){
     displayColor(COLOR_YELLOW);
     Serial.println(" Jaune");
   }
-  if(tdsValue >= 500 || EC >= 0.5){
+  else{
     displayColor(COLOR_RED);
     Serial.println(" Red");
   }
